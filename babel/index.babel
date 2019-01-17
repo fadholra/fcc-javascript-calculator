@@ -1,0 +1,86 @@
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      curr: '0',
+      prev: ''
+    };
+    
+    this.handleNumbers = this.handleNumbers.bind(this);
+    this.handleOperators = this.handleOperators.bind(this);
+    this.handleDecimal = this.handleDecimal.bind(this);
+    this.clear = this.clear.bind(this);
+    this.evaluate = this.evaluate.bind(this);
+  }
+  
+  handleNumbers(e) {
+    this.setState({
+      curr: this.state.curr === '0' ? e.target.value : this.state.curr + e.target.value
+    });
+  }
+  
+  handleOperators(e) {
+    if(/[+-/*]$/.test(this.state.curr)) this.state.curr = this.state.curr.slice(0, -1) 
+    this.setState({
+      curr: this.state.curr + e.target.value
+    });
+  }
+  
+  handleDecimal(e) {
+    let lastIndex = this.state.curr.split(/[*/+-]/).pop();
+    console.log(lastIndex)
+    if(lastIndex == '') {
+      this.setState({
+        curr: this.state.curr + '0.'
+      })
+    } else if(!/[.]/.test(lastIndex)) {
+      this.setState({
+        curr: this.state.curr + e.target.value
+      })
+    }
+  }
+  
+  clear() {
+    this.setState({
+      curr: '0'
+    })
+  }
+  
+  evaluate() {
+    if(/[+-/*]$/.test(this.state.curr)) this.state.curr = this.state.curr.slice(0, -1)
+    let result = Math.round(eval(this.state.curr) * 1000000) / 1000000;
+    this.setState({
+      curr: result
+    });
+  }
+  
+  render() {
+    return(
+      <div >
+        <div id="display">{ this.state.curr }</div>
+        <div className="calc">
+          <button id="clear" onClick={ this.clear }>clear</button>
+          <button id="divide" value='/' onClick={ this.handleOperators }>/</button>
+          <button id="multiply" value='*' onClick={ this.handleOperators }>x</button>
+          <button id="seven" value='7' onClick={ this.handleNumbers }>7</button>
+          <button id="eight" value='8' onClick={ this.handleNumbers }>8</button>
+          <button id="nine" value='9' onClick={ this.handleNumbers }>9</button>
+          <button id="add" value='+' onClick={ this.handleOperators }>+</button>
+          <button id="four" value='4' onClick={ this.handleNumbers }>4</button>
+          <button id="five" value='5' onClick={ this.handleNumbers }>5</button>
+          <button id="six" value='6' onClick={ this.handleNumbers }>6</button>
+          <button id="subtract" value='-' onClick={ this.handleOperators }>-</button>
+          <button id="one" value='1' onClick={ this.handleNumbers }>1</button>
+          <button id="two" value='2' onClick={ this.handleNumbers }>2</button>
+          <button id="three" value='3' onClick={ this.handleNumbers }>3</button>
+          <button id="equals" value='=' onClick={ this.evaluate }>=</button>
+          <button id="zero" value='0' onClick={ this.handleNumbers }>0</button>
+          <button id="decimal" value='.' onClick={ this.handleDecimal }>.</button>
+        </div>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'));

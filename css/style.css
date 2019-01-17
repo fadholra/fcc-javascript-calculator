@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css?family=Unlock");
+body {
+  font-family: 'Unlock', cursive;
+}
+
+.center {
+  text-align: center;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#display {
+  border: 3px solid #9e9e9e;
+  margin: 1.5% 0;
+  background-color: black;
+  padding: 5px;
+  text-align: right;
+  font-size: 2em;
+  color: white;
+}
+
+button {
+  position: relative;
+  height: 65px;
+  width: 80px;
+  color: white;
+  outline: 1px solid black;
+  border: none;
+  background: #9e9e9e;
+  font-family: Unlock;
+  font-size: 1.35em;
+}
+button:hover {
+  color: black;
+  outline: 1px solid white;
+  z-index: 2;
+}
+
+.calc {
+  border: 2px solid #47476b;
+  padding: 5px;
+  background: black;
+  width: 320px;
+  position: relative;
+}
+.calc #clear {
+  width: 160px;
+  background-color: #ef5350;
+}
+.calc #equals {
+  height: 130px;
+  background-color: #2962ff;
+  position: absolute;
+}
+.calc #zero {
+  width: 160px;
+}
+.calc #decimal {
+  width: 79px;
+}
